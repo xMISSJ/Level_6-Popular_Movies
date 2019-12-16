@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Popular Movies</string>
+    <string name="main_intro">The most popular movies of</string>
+    <string name="button_text">submit</string>
 </resources>
