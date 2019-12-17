@@ -2,6 +2,8 @@ package com.example.popularmovies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popularmovies.API.Movie
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         initViews();
+        initViewModel();
     }
 
     private fun initViews(){
@@ -36,5 +39,14 @@ class MainActivity : AppCompatActivity() {
         //createItemTouchHelper().attachToRecyclerView(rvMovies);
 
         MovieApi.createApi().getPopularMovies(api_key);
+    }
+
+    private fun initViewModel(){
+        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        viewModel.movies.observe(this, Observer {
+            movies.clear()
+            movies.addAll(it)
+            movieAdapter.notifyDataSetChanged()
+        })
     }
 }

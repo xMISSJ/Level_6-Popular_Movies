@@ -11,20 +11,20 @@ import retrofit2.Response
 
 class MainActivityViewModel (application: Application) : AndroidViewModel (application) {
 
-    val movie = MutableLiveData<List<Movie>>();
+    val movies = MutableLiveData<List<Movie>>();
     val error = MutableLiveData<String>();
     val api_key = "f0fa9c9cc2005f6f66bff61af5faad51"
 
     /**
      * Get movie information from the repository using Retrofit.
-     * onResponse if the response is successful populate the [movie] object.
+     * onResponse if the response is successful populate the [movies] object.
      * If the call encountered an error then populate the [error] object.
      */
 
     fun getPopularMovies() {
         MovieApi.createApi().getPopularMovies(api_key).enqueue(object : Callback<List<Movie>> {
             override fun onResponse(call: Call<List<Movie>>, response: Response<List<Movie>>) {
-                if (response.isSuccessful) movie.value = response.body()
+                if (response.isSuccessful) movies.value = response.body()
                 else error.value = "An error occurred: ${response.errorBody().toString()}"
             }
 
