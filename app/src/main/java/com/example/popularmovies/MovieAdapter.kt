@@ -28,8 +28,8 @@ class MovieAdapter (private val movies: List<Movie>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context;
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
-        )
+            LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false)
+        );
     }
 
     // Size of Movies.
