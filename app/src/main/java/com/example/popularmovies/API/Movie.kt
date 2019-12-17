@@ -15,4 +15,8 @@ data class Movie (
     @SerializedName("overview") var overview: String,
     @SerializedName("releaseDate") var releaseDate: String,
     @SerializedName("posterPath") var posterPath: String
-)
+) {
+    private val baseUrl = "https://image.tmdb.org/t/p/w500/"
+
+    fun getMovieUrl() = baseUrl + posterPath
+}

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.popularmovies.API.Movie
+import kotlinx.android.synthetic.main.item_movie.view.*
 
 /*
  * An ArrayList of Movie objects is added to the class constructor
@@ -46,8 +48,8 @@ class MovieAdapter (private val movies: List<Movie>) :
      */
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: Movie) {
-            //itemView.etTitle.text = game.title
-            //itemView.etPlatform.text = game.platform
+            itemView.tvNumber.text = movie.id.toString()
+            Glide.with(context).load(movie.getMovieUrl()).into(itemView.ivMovie)
         }
     }
 }

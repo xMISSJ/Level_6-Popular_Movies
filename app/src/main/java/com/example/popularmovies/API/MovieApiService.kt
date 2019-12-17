@@ -6,7 +6,7 @@ import retrofit2.http.GET
 // Service.
 public interface MovieApiService {
 
-    // The GET method needed to retrieve the movie's data.
-    @GET("3/movie/550?api_key=f0fa9c9cc2005f6f66bff61af5faad51")
+    // The GET method needed to retrieve the popular movies.
+    @GET("movie/popular")
     fun getMovie(): Call<Movie>;
 }
