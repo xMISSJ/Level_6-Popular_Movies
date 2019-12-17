@@ -14,11 +14,11 @@ class MainActivity : AppCompatActivity() {
     private val movieAdapter = MovieAdapter(movies);
     private val movieRepository = MovieRepository();
 
-    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var viewModel: MainActivityViewModel;
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         supportActionBar?.title = "Movie List";
 
         initViews();
@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews(){
         // Initialize the recycler view with a linear layout manager, adapter
-        rvMovies.layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
-        rvMovies.adapter = movieAdapter
-        //createItemTouchHelper().attachToRecyclerView(rvMovies)
+        rvMovies.layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false);
+        rvMovies.adapter = movieAdapter;
+        //createItemTouchHelper().attachToRecyclerView(rvMovies);
     }
 }

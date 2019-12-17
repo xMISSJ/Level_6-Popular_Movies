@@ -18,5 +18,5 @@ data class Movie (
 ) {
     private val baseUrl = "https://image.tmdb.org/t/p/w500/"
 
-    fun getMovieUrl() = baseUrl + posterPath
+    fun getMovieUrl() = baseUrl + posterPath;
 }

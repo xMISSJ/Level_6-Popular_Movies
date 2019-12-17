@@ -19,27 +19,27 @@ class MovieAdapter (private val movies: List<Movie>) :
         *  For the context variable the lateinit declaration has been used to let Kotlin
         *  know that this variable will be initialized later (in the onCreateViewHolder method).
         */
-    lateinit var context: Context
+    lateinit var context: Context;
 
     /*
      * In onCreateViewHolder a ViewHolder object is created which inflates the layout file we created (item_portal.xml).
      * We will be needing Context later on so a variable context is set.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        context = parent.context
+        context = parent.context;
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
         )
     }
 
     // Size of Movies.
     override fun getItemCount(): Int {
-        return movies.size
+        return movies.size;
     }
 
     // Bind method to bind the data to the ViewHolder.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(movies[position])
+        holder.bind(movies[position]);
     }
 
     /*
@@ -48,8 +48,8 @@ class MovieAdapter (private val movies: List<Movie>) :
      */
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: Movie) {
-            itemView.tvNumber.text = movie.id.toString()
-            Glide.with(context).load(movie.getMovieUrl()).into(itemView.ivMovie)
+            itemView.tvNumber.text = movie.id.toString();
+            Glide.with(context).load(movie.getMovieUrl()).into(itemView.ivMovie);
         }
     }
 }
