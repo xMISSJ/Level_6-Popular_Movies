@@ -13,13 +13,14 @@ import kotlinx.android.synthetic.main.item_movie.view.*
  * An ArrayList of Movie objects is added to the class constructor
  * so the RecyclerView knows which Movie objects it needs to display.
  */
-class MovieAdapter (private val movies: List<Movie>) :
+class MovieAdapter (private val movies: List<Movie>, private val onClick: (Movie) -> Unit) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     /*
         *  For the context variable the lateinit declaration has been used to let Kotlin
         *  know that this variable will be initialized later (in the onCreateViewHolder method).
         */
     lateinit var context: Context;
+    private var movieCounter = 0;
 
     /*
      * In onCreateViewHolder a ViewHolder object is created which inflates the layout file we created (item_portal.xml).
@@ -27,6 +28,7 @@ class MovieAdapter (private val movies: List<Movie>) :
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context;
+
         return ViewHolder(
             LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false)
         );
@@ -47,9 +49,18 @@ class MovieAdapter (private val movies: List<Movie>) :
      * references from the layout file for the ImageView and TextView.
      */
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        init {
+            itemView.setOnClickListener{
+                // adapterPosition is position of the item represented by the ViewHolder.
+                onClick(movies[adapterPosition]);
+            }
+        }
+
         fun bind(movie: Movie) {
-            itemView.tvNumber.text = movie.id.toString();
-            Glide.with(context).load(movie.getMovieUrl()).into(itemView.ivMovie);
+            itemView.tvNumber.text = movie.id.toString() + "."
+            Glide.with(context).load(movie.getPosterImage()).into(itemView.ivMovie);
+            movieCounter++;
         }
     }
 }

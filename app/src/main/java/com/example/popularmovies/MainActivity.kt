@@ -1,24 +1,30 @@
 package com.example.popularmovies
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.popularmovies.API.Movie
 import com.example.popularmovies.API.MovieApi
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_movie.*
 
 const val api_key = "f0fa9c9cc2005f6f66bff61af5faad51"
+const val MOVIE = "MOVIE"
 
 class MainActivity : AppCompatActivity() {
 
     private val movies = arrayListOf<Movie>();
-    private val movieAdapter = MovieAdapter(movies);
+    private val movieAdapter = MovieAdapter(movies) { movie ->
+        starDetailActivity(movie);
+    }
 
     private lateinit var viewModel: MainActivityViewModel;
 
@@ -36,35 +42,43 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews(){
-        // Initialize the recycler view with a linear layout manager, adapter
-        rvMovies.layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false);
+        // Initialize the recycler view with a linear layout manager, adapter.
+        rvMovies.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL);
         rvMovies.adapter = movieAdapter;
-        //createItemTouchHelper().attachToRecyclerView(rvMovies);
-
-        MovieApi.createApi().getPopularMovies(api_key);
     }
 
     private fun initViewModel(){
+        // Observe movies from view model. When data has changed, update list.
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         viewModel.movies.observe(this, Observer {
-            movies.clear();
-            movies.addAll(it);
+            this@MainActivity.movies.clear();
+            this@MainActivity.movies.addAll(it);
             movieAdapter.notifyDataSetChanged();
         })
     }
 
     private fun onClick() {
         var submitYear = etYear.text.toString();
-        val yearRange = 1900..2019
+        val yearRange = 1900..2019;
+
+        // Checks whether input isn't empty and has a valid year.
         if (submitYear.isNotBlank()) {
             if (submitYear.toInt() !in yearRange) {
-                Toast.makeText(this, "Date must be between 1900 and 2019.", Toast.LENGTH_LONG)
-                    .show();
+                Toast.makeText(this, "Date must be between 1900 and 2019.", Toast.LENGTH_LONG).show();
+                // If so, add the movies from the submitted year.
             } else {
                 Toast.makeText(this, "Load Movies", Toast.LENGTH_LONG).show();
+                viewModel.getMovies(submitYear)
             }
         } else {
             Toast.makeText(this, "Please fill in a date.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    // Activity is started on click of one of the items in the adapter. This is handled
+    fun starDetailActivity(movie: Movie){
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(MOVIE, movie)
+        startActivity(intent)
     }
 }
