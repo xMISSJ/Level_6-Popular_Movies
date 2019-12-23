@@ -13,14 +13,9 @@ data class Movie (
     var id: Int,
 
     @SerializedName("title") var title: String,
-    @SerializedName("releaseDate") var releaseDate: String,
-    @SerializedName("voteAverage") var voteAverage: Double,
+    @SerializedName("release_date") var releaseDate: String,
+    @SerializedName("vote_average") var voteAverage: Double,
     @SerializedName("overview") var overview: String,
-    @SerializedName("posterPath") var posterPath: String,
-    @SerializedName("backdropPath") var backdropPath: String
-) : Parcelable {
-    private val baseUrl = "https://image.tmdb.org/t/p/w500/"
-
-    fun getPosterImage() = baseUrl + posterPath;
-    fun getBackdropImage() = baseUrl + backdropPath;
-}
+    @SerializedName("poster_path") var posterPath: String,
+    @SerializedName("backdrop_path") var backdropPath: String
+) : Parcelable

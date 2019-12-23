@@ -3,6 +3,7 @@ package com.example.popularmovies
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -54,6 +55,9 @@ class MainActivity : AppCompatActivity() {
             this@MainActivity.movies.clear();
             this@MainActivity.movies.addAll(it);
             movieAdapter.notifyDataSetChanged();
+        })
+        viewModel.error.observe(this, Observer {
+            Log.d("MyDebug", it)
         })
     }
 

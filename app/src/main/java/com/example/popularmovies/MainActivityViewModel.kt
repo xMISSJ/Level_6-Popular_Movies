@@ -1,11 +1,10 @@
 package com.example.popularmovies
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.popularmovies.API.Movie
-import com.example.popularmovies.API.MovieApi
-import com.example.popularmovies.API.MovieRepository
+import com.example.popularmovies.API.*
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -14,7 +13,7 @@ import retrofit2.Response
 
 class MainActivityViewModel (application: Application) : AndroidViewModel (application) {
 
-    private val movieRepository = MovieRepository()
+    private val movieRepository = MovieRepository();
 
     val movies = MutableLiveData<List<Movie>>();
     val error = MutableLiveData<String>();
@@ -26,15 +25,21 @@ class MainActivityViewModel (application: Application) : AndroidViewModel (appli
      */
 
     fun getMovies(year: String) {
-        movieRepository.getPopularMovies(year).enqueue(object: Callback<List<Movie>> {
+        movieRepository.getPopularMovies(year).enqueue(object: Callback<MoviesResponse> {
 
-            override fun onResponse(call: Call<List<Movie>>, response: Response<List<Movie>>) {
-                if (response.isSuccessful) movies.value = response.body()
+            override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
+
+                if (response.isSuccessful) {
+                    // resultMovie is variable from the MoviesResponse class.
+                    movies.value = response.body()?.resultMovie
+                    Log.d("MyDebug","Success");
+                }
                 else error.value = "An error occurred: ${response.errorBody().toString()}"
             }
 
-            override fun onFailure(call: Call<List<Movie>>, t: Throwable) {
-                error.value = t.message
+            override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
+                error.value = t.message;
+                Log.d("MyDebug","Failure");
             }
         })
     }

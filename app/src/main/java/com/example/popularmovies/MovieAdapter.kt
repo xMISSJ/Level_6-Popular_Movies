@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.popularmovies.API.Movie
+import com.example.popularmovies.API.MovieApi
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 /*
@@ -20,7 +21,7 @@ class MovieAdapter (private val movies: List<Movie>, private val onClick: (Movie
         *  know that this variable will be initialized later (in the onCreateViewHolder method).
         */
     lateinit var context: Context;
-    private var movieCounter = 0;
+    private val imageBaseUrl = MovieApi.imageBaseUrl;
 
     /*
      * In onCreateViewHolder a ViewHolder object is created which inflates the layout file we created (item_portal.xml).
@@ -58,9 +59,8 @@ class MovieAdapter (private val movies: List<Movie>, private val onClick: (Movie
         }
 
         fun bind(movie: Movie) {
-            itemView.tvNumber.text = movie.id.toString() + "."
-            Glide.with(context).load(movie.getPosterImage()).into(itemView.ivMovie);
-            movieCounter++;
+            itemView.tvNumber.text = "${(adapterPosition + 1)}.";
+            Glide.with(context).load(imageBaseUrl + movie.posterPath).into(itemView.ivMovie);
         }
     }
 }

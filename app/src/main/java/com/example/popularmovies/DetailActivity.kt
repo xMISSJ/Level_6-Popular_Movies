@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.popularmovies.API.Movie
+import com.example.popularmovies.API.MovieApi
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
@@ -27,8 +28,8 @@ class DetailActivity : AppCompatActivity() {
         tvRelease.text = movie.releaseDate;
         tvTitle.text = movie.title;
 
-        Glide.with(this).load(movie.getPosterImage()).into(ivPoster);
-        Glide.with(this).load(movie.getBackdropImage()).into(ivBackdrop);
+        Glide.with(this).load(MovieApi.imageBaseUrl + movie.posterPath).into(ivPoster);
+        Glide.with(this).load(MovieApi.imageBaseUrl + movie.backdropPath).into(ivBackdrop);
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

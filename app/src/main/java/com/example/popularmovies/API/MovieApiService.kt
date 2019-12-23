@@ -15,5 +15,5 @@ public interface MovieApiService {
             "&include_adult=false" +
             "&include_video=false" +
             "&page=1")
-    fun getMovies(@Query("year") year: String): Call<List<Movie>>
+    fun getMovies(@Query("year") year: String): Call<MoviesResponse>
 }
