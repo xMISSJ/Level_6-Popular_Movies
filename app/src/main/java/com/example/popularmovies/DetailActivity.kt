@@ -9,6 +9,7 @@ import com.example.popularmovies.API.Movie
 import com.example.popularmovies.API.MovieApi
 import kotlinx.android.synthetic.main.activity_detail.*
 
+
 class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,15 +20,15 @@ class DetailActivity : AppCompatActivity() {
         initViews();
     }
 
-    fun initViews(){
+    private fun initViews(){
         val movie: Movie = intent.getParcelableExtra(MOVIE);
 
-        tvOverview.movementMethod = ScrollingMovementMethod();
-        tvOverview.text = movie.overview;
-        tvRating.text = movie.voteAverage.toString();
-        tvRelease.text = movie.releaseDate;
         tvTitle.text = movie.title;
+        tvRelease.text = movie.releaseDate;
+        tvRating.text = movie.voteAverage.toString();
+        tvOverview.text = movie.overview;
 
+        // Poster and Backdrop.
         Glide.with(this).load(MovieApi.imageBaseUrl + movie.posterPath).into(ivPoster);
         Glide.with(this).load(MovieApi.imageBaseUrl + movie.backdropPath).into(ivBackdrop);
     }

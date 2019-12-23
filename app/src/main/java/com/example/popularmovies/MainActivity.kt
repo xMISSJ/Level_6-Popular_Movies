@@ -1,9 +1,13 @@
 package com.example.popularmovies
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -24,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private val movies = arrayListOf<Movie>();
     private val movieAdapter = MovieAdapter(movies) { movie ->
-        starDetailActivity(movie);
+        startDetailActivity(movie);
     }
 
     private lateinit var viewModel: MainActivityViewModel;
@@ -62,6 +66,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onClick() {
+
+        hideKeyboard(this.rvMovies)
+
         var submitYear = etYear.text.toString();
         val yearRange = 1900..2019;
 
@@ -71,7 +78,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Date must be between 1900 and 2019.", Toast.LENGTH_LONG).show();
                 // If so, add the movies from the submitted year.
             } else {
-                Toast.makeText(this, "Load Movies", Toast.LENGTH_LONG).show();
                 viewModel.getMovies(submitYear)
             }
         } else {
@@ -80,9 +86,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Activity is started on click of one of the items in the adapter. This is handled
-    fun starDetailActivity(movie: Movie){
-        val intent = Intent(this, DetailActivity::class.java)
+    fun startDetailActivity(movie: Movie){
+        val intent = Intent(this@MainActivity, DetailActivity::class.java)
         intent.putExtra(MOVIE, movie)
         startActivity(intent)
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

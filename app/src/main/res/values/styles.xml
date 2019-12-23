@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Transparent application theme. -->
+    <style name="Transparent" parent="Theme.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
 </resources>

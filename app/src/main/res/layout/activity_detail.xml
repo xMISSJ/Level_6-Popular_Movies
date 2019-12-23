@@ -4,19 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:theme="@style/Transparent"
     tools:context=".DetailActivity">
 
     <ImageView
         android:id="@+id/ivBackdrop"
         android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="202.5dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/ivPoster"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@color/colorPrimary" />
 
     <TextView
@@ -31,17 +29,20 @@
 
     <ImageView
         android:id="@+id/ivPoster"
-        android:layout_width="162dp"
-        android:layout_height="254dp"
+        android:layout_width="130dp"
+        android:layout_height="190dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="240dp"
         android:layout_marginBottom="200dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivBackdrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBackdrop"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/placeholder" />
 
     <TextView
@@ -49,10 +50,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="10dp"
         android:text="@string/overview_text"
         android:textColor="@android:color/black"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -64,7 +65,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="14dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:scrollbars="vertical"
@@ -87,31 +87,20 @@
         app:layout_constraintStart_toEndOf="@+id/textRelease"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/tvRating"
-        app:layout_constraintStart_toEndOf="@+id/ivPoster"
-        app:layout_constraintTop_toBottomOf="@+id/textRelease"
-        app:srcCompat="@drawable/ic_star" />
-
     <TextView
         android:id="@+id/tvRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="123dp"
         android:text="8.5"
         android:textColor="@color/rating_color"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/ivStar"
         app:layout_constraintTop_toBottomOf="@+id/textRelease" />
 
     <TextView
@@ -119,22 +108,23 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/black"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivPoster"
         app:layout_constraintTop_toBottomOf="@+id/ivBackdrop" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="12dp"
+        android:id="@+id/ivStar"
+        android:layout_width="20dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/ivPoster"
         app:layout_constraintTop_toBottomOf="@+id/textRelease"
         app:srcCompat="@drawable/ic_star" />
