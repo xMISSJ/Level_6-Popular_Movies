@@ -5,8 +5,6 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.popularmovies.API.*
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,6 +29,12 @@ class MainActivityViewModel (application: Application) : AndroidViewModel (appli
 
                 if (response.isSuccessful) {
                     // resultMovie is variable from the MoviesResponse class.
+                    // response.body()? returns a JSON object:
+                    //    "page": 0,
+                    //    "results": "ARRAY MET MOVIE OBJECTEN",
+                    //    "total_results": 0,
+                    //    "total_pages": 0
+                    // you want to store this in a List which is in my case MoviesResponse.kt.
                     movies.value = response.body()?.resultMovie
                     Log.d("MyDebug","Success");
                 }
